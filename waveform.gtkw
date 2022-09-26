@@ -1,0 +1,30 @@
+[*]
+[*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
+[*] Sun Sep 25 12:34:25 2022
+[*]
+[dumpfile] "/home/cyril/workspace/verilator_test/waveform.vcd"
+[dumpfile_mtime] "Sun Sep 25 12:34:10 2022"
+[dumpfile_size] 1758
+[savefile] "/home/cyril/workspace/verilator_test/waveform.gtkw"
+[timestart] 8
+[size] 1846 862
+[pos] 54 27
+*-5.008770 65 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] TOP.
+[sst_width] 233
+[signals_width] 118
+[sst_expanded] 1
+[sst_vpaned_height] 235
+@28
+TOP.top.a
+TOP.top.b
+TOP.top.clk
+TOP.top.f
+TOP.top.rst_n
+@22
+TOP.top.data[7:0]
+TOP.top.count[15:0]
+@23
+TOP.top.led[7:0]
+[pattern_trace] 1
+[pattern_trace] 0
