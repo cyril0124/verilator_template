@@ -9,8 +9,6 @@
 
 #include "Vtop.h"
 
-#define MAX_SIM_TIME 100
-
 VerilatedContext* contextp = NULL;
 VerilatedVcdC* tfp = NULL;
 TOP_NAME* dut = NULL;
@@ -20,30 +18,30 @@ void nvboard_bind_all_pins(Vtop* top);
 static void single_cycle(void) {
     contextp->timeInc(1);
 
-#ifdef NVBOARD_ENABLE
+    #ifdef NVBOARD_ENABLE
         nvboard_update();
-#endif
+    #endif
 
-    dut->eval();
+        dut->eval();
 
-#ifdef TRACE_ENABLE
-    if(tfp) tfp->dump((vluint64_t)(10*contextp->time()-2));
-#endif
+    #ifdef TRACE_ENABLE
+        if(tfp) tfp->dump((vluint64_t)(10*contextp->time()-2));
+    #endif
 
-    dut->clk = 1;
-    dut->eval();
-#ifdef TRACE_ENABLE
-    if(tfp) tfp->dump((vluint64_t)(10*contextp->time()));
-#endif
+        dut->clk = 1;
+        dut->eval();
+    #ifdef TRACE_ENABLE
+        if(tfp) tfp->dump((vluint64_t)(10*contextp->time()));
+    #endif
 
-    dut->clk = 0;
-    dut->eval();
-#ifdef TRACE_ENABLE
-    if(tfp) {
-        tfp->dump((vluint64_t)(10*contextp->time()+5));
-        tfp->flush();
-    }
-#endif
+        dut->clk = 0;
+        dut->eval();
+    #ifdef TRACE_ENABLE
+        if(tfp) {
+            tfp->dump((vluint64_t)(10*contextp->time()+5));
+            tfp->flush();
+        }
+    #endif
 }
 
 static void reset(int n) {
@@ -56,17 +54,17 @@ static void sim_init(void) {
     contextp = new VerilatedContext;
     dut = new TOP_NAME;
 
-#ifdef TRACE_ENABLE
-    tfp = new VerilatedVcdC;
-    contextp->traceEverOn(true);
-    dut->trace(tfp,99);
-    tfp->open("waveform.vcd");
-#endif
+    #ifdef TRACE_ENABLE
+        tfp = new VerilatedVcdC;
+        contextp->traceEverOn(true);
+        dut->trace(tfp,99);
+        tfp->open("waveform.vcd");
+    #endif
 
-#ifdef NVBOARD_ENABLE
-    nvboard_bind_all_pins(dut);
-    nvboard_init();
-#endif
+    #ifdef NVBOARD_ENABLE
+        nvboard_bind_all_pins(dut);
+        nvboard_init();
+    #endif
 
 }
 
@@ -77,15 +75,18 @@ static void sim_exit(void) {
     delete contextp;
     delete dut;
 
-#ifdef TRACE_ENABLE
-    tfp->close();
-    delete tfp;
-#endif
+    #ifdef TRACE_ENABLE
+        tfp->close();
+        delete tfp;
+    #endif
 
-#ifdef NVBOARD_ENABLE
-    nvboard_quit();
-#endif
+    #ifdef NVBOARD_ENABLE
+        nvboard_quit();
+    #endif
 }
+
+
+
 
 int main(int argc, char** argv, char** env) {
     sim_init();

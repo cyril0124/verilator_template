@@ -38,9 +38,12 @@ LDFLAGS += -lSDL2 -lSDL2_image
 ifeq ($(TRACE_ENABLE),y)
 CFLAGS += -D TRACE_ENABLE
 endif
+
 ifeq ($(NVBOARD_ENABLE),y)
 CFLAGS += -D NVBOARD_ENABLE
 endif
+
+CFLAGS += -D MAX_SIM_TIME=$(MAX_SIM_TIME)
 
 $(BIN): $(VSRCS) $(CSRCS) $(NVBOARD_ARCHIVE)
 	@rm -rf $(OBJ_DIR)
