@@ -1,4 +1,6 @@
-TOPNAME = top
+include $(shell pwd)/config.mk
+
+# TOPNAME = top
 NXDC_FILES = constr/top.nxdc
 INC_PATH ?=
 
@@ -9,8 +11,6 @@ VERILATOR_CFLAGS += -MMD --build -cc \
 BUILD_DIR = ./build
 OBJ_DIR = $(BUILD_DIR)/obj_dir
 BIN = $(BUILD_DIR)/$(TOPNAME)
-
-include $(shell pwd)/config.mk
 
 default: $(BIN)
 
@@ -44,6 +44,7 @@ CFLAGS += -D NVBOARD_ENABLE
 endif
 
 CFLAGS += -D MAX_SIM_TIME=$(MAX_SIM_TIME)
+CFLAGS += -D V_TOPNAME=$(V_TOPNAME)
 
 $(BIN): $(VSRCS) $(CSRCS) $(NVBOARD_ARCHIVE)
 	@rm -rf $(OBJ_DIR)
